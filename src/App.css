@@ -36,3 +36,47 @@
     transform: rotate(360deg);
   }
 }
+.todo-app {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.todo-app h1 {
+  text-align: center;
+  font-size: 24px;
+}
+
+.todo-app form {
+  margin-bottom: 20px;
+}
+
+.todo-app input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.todo-app button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.todo-app ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-app li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.todo-app li.completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
