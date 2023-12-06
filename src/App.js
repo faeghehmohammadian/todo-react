@@ -25,10 +25,6 @@ const TodoApp = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const clearCompletedTodos = () => {
-    setTodos(todos.filter((todo) => !todo.completed));
-  };
-
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
   };
@@ -42,9 +38,9 @@ const TodoApp = () => {
 
   return (
     <div className="todo-app">
-      <h1>Todo App</h1>
+      <h1>My Todos</h1>
 
-      <form onSubmit={(e) => {
+      <form className='formClass' onSubmit={(e) => {
         e.preventDefault();
         const text = e.target.elements.todoInput.value;
         if (text) {
@@ -53,7 +49,7 @@ const TodoApp = () => {
         }
       }}>
         <input type="text" placeholder="Enter a todo" id="todoInput" />
-        <button type="submit">Add Todo</button>
+        <button type="submit">Save</button>
       </form>
 
       <div className="filters">
@@ -77,22 +73,23 @@ const TodoApp = () => {
         </button>
       </div>
 
-      <ul>
+
         {filteredTodos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-            <input
+          <div style={{ width: '100%' }} key={todo.id} className={todo.completed ? 'completed' : ''}>
+            <div className='todoRowBox'>
+            <input 
               type="checkbox"
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
             />
-            {todo.text}
-            <button onClick={() => removeTodo(todo.id)}>Delete</button>
-          </li>
+            <div className='todoRowText'>{todo.text}</div>
+            <button className='deleteButton' onClick={() => removeTodo(todo.id)}>X</button>
+          </div>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      <button onClick={clearCompletedTodos}>Clear Completed Todos</button>
-    </div>
+    
   );
 };
 

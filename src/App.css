@@ -53,9 +53,13 @@
 }
 
 .todo-app input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   border: 1px solid #ccc;
+}
+.todo-app input[type=checkbox] {
+  width: 15px;
+  height: 15px;
 }
 
 .todo-app button {
@@ -63,20 +67,42 @@
   border: 1px solid #ccc;
   cursor: pointer;
 }
-
+.formClass{
+  display: flex;
+  flex-direction: row;
+}
+.todo-app button[type=submit] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: mediumslateblue;
+}
+.deleteButton{
+  float: right;
+  background-color: rgb(248, 71, 40);
+}
 .todo-app ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-.todo-app li {
+.todoRowBox{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.todoRowText{
+  width: 80%;
   padding: 10px;
+}
+.todo-app li {
+  padding: 20px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
 }
 
-.todo-app li.completed {
+.completed {
   text-decoration: line-through;
   color: #ccc;
 }
