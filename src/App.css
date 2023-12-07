@@ -42,7 +42,14 @@
   padding: 20px;
   border: 1px solid #ccc;
 }
-
+.filters select{
+  width: 80%;
+  height:37px;
+  float: right;
+}
+.filters{
+  width:200px ;
+}
 .todo-app h1 {
   text-align: center;
   font-size: 24px;
@@ -53,7 +60,7 @@
 }
 
 .todo-app input {
-  width: 80%;
+  width: 60%;
   padding: 10px;
   border: 1px solid #ccc;
 }
@@ -79,7 +86,12 @@
 }
 .deleteButton{
   float: right;
-  background-color: rgb(248, 71, 40);
+}
+.deleteButton:hover{
+  background-color: red;
+}
+.editButton:hover{
+  background-color: rgb(145, 128, 240);
 }
 .todo-app ul {
   list-style: none;
