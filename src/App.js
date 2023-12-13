@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState('all');
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [editedTodoText, setEditedTodoText] = useState('');
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
+  useEffect(() => {
+    const todoGet = JSON.parse(localStorage.getItem('todos'));
+    if (todoGet) {
+      setTodos(todoGet);
+    }
+  }, []);
   const addTodo = (text) => {
     setTodos([...todos, { id: Math.random(), text, completed: false }]);
   };
@@ -128,6 +138,7 @@ const TodoApp = () => {
         </div>
       ))}
     </div>
+    
   );
 };
 
