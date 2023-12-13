@@ -5,6 +5,7 @@ const port = 8080;
 
 const dotenv=require('dotenv');
 dotenv.config();
+const mongoose=require('mongoose');
 
 const router=require('./router')
 app.use(router);
@@ -12,7 +13,8 @@ app.use(router);
 app.get("/",(req,res)=>{
     res.send('Hello');
 });
-
-app.listen(port, () => {
-    console.log(`Server running on PORT: ${port}/`);
-});
+mongoose.connect(process.env.MONGO_URL).then(()=>{
+    app.listen(port, () => {
+        console.log(`Mongoose Connect and Server running on PORT: ${port}/`);
+    });
+})
