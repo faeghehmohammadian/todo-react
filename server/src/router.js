@@ -2,12 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const jwt=require('jsonwebtoken');
-const isLoggedIn = require('./middleware/isLoggedIn');
-
-const updateTodoRoute= require('./routers/updateTodoRoute')
-const createTodoRoute= require('./routers/createTodoRoute')
-const readTodoRoute= require('./routers/readTodoRoute')
-const deleteTodoRoute= require('./routers/deleteTodoRoute')
+const isLoggedIn = require('../middleware/isLoggedIn');
+const TodoModel = require('../models/TodoModel')
 
 router.post("/login",(req,res)=>{
     if (req.body.password === process.env.PASSWORD){
@@ -20,11 +16,28 @@ router.post("/login",(req,res)=>{
         
     }else{
         res.status(401).send('Warng Password');
-    } 
+    }
 });
-router.get('/todos',isLoggedIn, readTodoRoute)
-router.post('/todos',isLoggedIn, createTodoRoute)
-router.put('/todos/:id',isLoggedIn, updateTodoRoute)
-router.delete('/todos/:id',isLoggedIn, deleteTodoRoute)
-
+router.get('/todos',isLoggedIn,async(req,res)=>{
+    const todos=await TodoModel.find();
+    res.json(todos)
+})
+router.post('/todos',isLoggedIn,async(req,res)=>{
+    const {text} = req.body;
+    console.log(text)
+    const todo = new TodoModel({
+        text,
+        completed:false,
+    })
+    const newTodo = await todo.save();
+    res.json(newTodo)
+})
+router.put('/todos/:id',isLoggedIn,async(req,res)=>{
+    const {id}= req.params;
+    const todo =await TodoModel.findById(id);
+    todo.text =req.body.text;
+    todo.completed=req.body.completed;
+    await todo.save();
+    res.json(todo);
+})
 module.exports=router;
